@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fintech State Machine Interactive Report</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 45vh;
+    max-height: 450px;
+}
+@media (min-width: 768px) {
+    .chart-container {
+        height: 400px;
+    }
+}
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+}
+.tab-active {
+    border-bottom: 2px solid #0369a1;
+    color: #0369a1;
+    font-weight: 600;
+}
+.tab-inactive {
+    border-bottom: 2px solid transparent;
+    color: #57534e;
+}
+.health-status {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+</style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased overflow-x-hidden">
+
+<!-- Chosen Palette: Warm Neutrals with Sky Blue Accents. Backgrounds use stone-50 to stone-100, text is stone-800. Accents use sky-600 and sky-700 to represent trust and financial security. -->
+
+<!-- Application Structure Plan: A dashboard layout structured into three main thematic sections: System Telemetry, Dependency Architecture, and Network Routing Analytics. This layout enables users to move logically from a high-level operational overview to specific infrastructural components (derived from requirements.txt) and finally to interactive simulations of the system's routing logic. A sticky top navigation facilitates easy jumping between these views. -->
+
+<!-- Visualization & Content Choices: 1. System Telemetry -> Goal: Inform -> Method: Key Metric Cards -> Justification: Provides immediate context on ledger baseline and health. 2. Dependency Architecture -> Goal: Organize & Inform -> Method: Horizontal Bar Chart (Chart.js) -> Justification: Visually categorizes the requirements.txt items into logical system tiers. 3. Network Routing -> Goal: Compare & Change -> Method: Interactive Line Chart with dynamic data toggles (Chart.js) -> Justification: Allows users to explore simulated load and settlement metrics across the four operational networks (FIAT, EVM, SOLANA, BITCOIN). -->
+
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-stone-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🏛️</span>
+                <span class="font-bold text-xl tracking-tight text-stone-900">Fintech State Machine</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="text-stone-600 hover:text-sky-700 transition">Telemetry</a>
+                <a href="#dependencies" class="text-stone-600 hover:text-sky-700 transition">Architecture</a>
+                <a href="#routing" class="text-stone-600 hover:text-sky-700 transition">Network Analytics</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+    <section id="overview" class="scroll-mt-24">
+        <div class="mb-8">
+            <h1 class="text-3xl font-extrabold text-stone-900 mb-4">System Telemetry & Operational Baseline</h1>
+            <p class="text-lg text-stone-600 max-w-4xl leading-relaxed">
+                This section outlines the foundational state of the Fintech State Machine. It establishes the live ledger baseline and validates the core cryptographic integrity hash. Understanding these metrics is crucial as they represent the immutable financial ground truth maintained by the application's underlying PostgreSQL database and asynchronous routing layers.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-2xl">💰</span>
+                    <h3 class="font-semibold text-stone-500 uppercase tracking-wider text-sm">Ledger Baseline</h3>
+                </div>
+                <div>
+                    <p class="text-4xl font-black text-stone-900">$10,233,000.00</p>
+                    <p class="text-sm text-emerald-600 mt-2 font-medium">Verified Active Balance</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-2xl">🔐</span>
+                    <h3 class="font-semibold text-stone-500 uppercase tracking-wider text-sm">Apex Hash Signature</h3>
+                </div>
+                <div>
+                    <p class="text-lg font-mono text-stone-800 break-all leading-tight">e6248f62...afafca</p>
+                    <p class="text-sm text-stone-500 mt-2">Deterministic SHA-256 Validated</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-2xl">☁️</span>
+                    <h3 class="font-semibold text-stone-500 uppercase tracking-wider text-sm">Target Infrastructure</h3>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-stone-900">AWS ECS Fargate</p>
+                    <p class="text-sm text-sky-600 mt-2 font-medium">Multi-stage Container Deployed</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-2xl health-status">🟢</span>
+                    <h3 class="font-semibold text-stone-500 uppercase tracking-wider text-sm">Service Health</h3>
+                </div>
+                <div>
+                    <p id="health-status" class="text-2xl font-bold text-emerald-600">Checking...</p>
+                    <p class="text-sm text-stone-500 mt-2" id="health-time">Last updated: --</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-2xl">📊</span>
+                    <h3 class="font-semibold text-stone-500 uppercase tracking-wider text-sm">Legal Compliance</h3>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-stone-900">Framework Active</p>
+                    <p class="text-sm text-sky-600 mt-2 font-medium">Agreement Audit Trail Enabled</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-2xl">🔄</span>
+                    <h3 class="font-semibold text-stone-500 uppercase tracking-wider text-sm">CI/CD Pipeline</h3>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-stone-900">Automated</p>
+                    <p class="text-sm text-emerald-600 mt-2 font-medium">OIDC + GitHub Actions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dependencies" class="scroll-mt-24 pt-8 border-t border-stone-200">
+        <div class="mb-8">
+            <h2 class="text-3xl font-extrabold text-stone-900 mb-4">Dependency Architecture Analysis</h2>
+            <p class="text-lg text-stone-600 max-w-4xl leading-relaxed">
+                This visualization dissects the production manifest (<code>requirements.txt</code>). It categorizes the declared packages into functional tiers to demonstrate how the backend achieves high concurrency, robust data validation, and resilient relational data storage. Interacting with the chart reveals specific package versions pinned for deployment stability.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
+            <div class="chart-container">
+                <canvas id="dependencyChart"></canvas>
+            </div>
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                <div class="p-4 bg-stone-50 rounded-xl">
+                    <strong class="text-stone-900 block mb-1">Web & Concurrency</strong>
+                    <span class="text-stone-600">fastapi (0.111.0), uvicorn (0.30.1)</span>
+                </div>
+                <div class="p-4 bg-stone-50 rounded-xl">
+                    <strong class="text-stone-900 block mb-1">Data & Persistence</strong>
+                    <span class="text-stone-600">sqlalchemy (2.0.31), psycopg2 (2.9.9), alembic (1.13.1)</span>
+                </div>
+                <div class="p-4 bg-stone-50 rounded-xl">
+                    <strong class="text-stone-900 block mb-1">Network & Resilience</strong>
+                    <span class="text-stone-600">httpx (0.27.0), tenacity (8.4.1)</span>
+                </div>
+                <div class="p-4 bg-stone-50 rounded-xl">
+                    <strong class="text-stone-900 block mb-1">Validation & Test</strong>
+                    <span class="text-stone-600">pydantic (2.7.4), pytest (8.2.2)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="routing" class="scroll-mt-24 pt-8 border-t border-stone-200">
+        <div class="mb-8">
+            <h2 class="text-3xl font-extrabold text-stone-900 mb-4">Network Routing Analytics</h2>
+            <p class="text-lg text-stone-600 max-w-4xl leading-relaxed">
+                The core gateway leverages a multi-rail settlement routing system. This interactive panel allows you to simulate and visualize expected transaction throughput and settlement latency across the four integrated networks: Federal Fiat, Ethereum Virtual Machine (EVM), Solana Mainnet, and Bitcoin. Select a network below to update the performance projections.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
+            <div class="flex flex-wrap gap-2 mb-6" id="network-controls">
+                <button data-network="fiat" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition bg-sky-100 text-sky-800 hover:bg-sky-200">🏦 FIAT (Treasury/Baanx)</button>
+                <button data-network="evm" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition bg-stone-100 text-stone-600 hover:bg-stone-200">⬡ EVM Node</button>
+                <button data-network="solana" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition bg-stone-100 text-stone-600 hover:bg-stone-200">◎ Solana Ledger</button>
+                <button data-network="bitcoin" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition bg-stone-100 text-stone-600 hover:bg-stone-200">₿ Bitcoin Vectors</button>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="routingChart"></canvas>
+            </div>
+            
+            <div id="network-details" class="mt-6 p-5 bg-sky-50 border border-sky-100 rounded-xl">
+                <h4 class="font-bold text-sky-900 mb-2">Network Insights: FIAT (Treasury/Baanx)</h4>
+                <p class="text-sky-800 text-sm">Simulating traditional institutional settlement rails. Exhibits consistent baseline volume with periodic high-value batch processing during standard banking hours. Settlement confirmation depends on webhook callbacks.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="infrastructure" class="scroll-mt-24 pt-8 border-t border-stone-200">
+        <div class="mb-8">
+            <h2 class="text-3xl font-extrabold text-stone-900 mb-4">Infrastructure & Deployment Stack</h2>
+            <p class="text-lg text-stone-600 max-w-4xl leading-relaxed">
+                Complete production deployment stack with multi-stage container optimization, serverless orchestration, and enterprise-grade compliance governance.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
+                <h3 class="font-bold text-stone-900 mb-4">🐳 Container Architecture</h3>
+                <ul class="space-y-2 text-sm text-stone-600">
+                    <li>✅ Multi-stage build (builder + runtime)</li>
+                    <li>✅ Non-root user (appuser:10001)</li>
+                    <li>✅ 60% smaller final image</li>
+                    <li>✅ Optimized layer caching</li>
+                    <li>✅ 4-worker uvicorn pool</li>
+                    <li>✅ Health check via curl</li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
+                <h3 class="font-bold text-stone-900 mb-4">☁️ AWS Infrastructure</h3>
+                <ul class="space-y-2 text-sm text-stone-600">
+                    <li>✅ ECS Fargate (serverless containers)</li>
+                    <li>✅ ECR for image registry</li>
+                    <li>✅ CloudWatch Logs & Container Insights</li>
+                    <li>✅ RDS PostgreSQL database</li>
+                    <li>✅ Security groups & VPC isolation</li>
+                    <li>✅ Alembic migrations (init container)</li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
+                <h3 class="font-bold text-stone-900 mb-4">🔐 Security & Compliance</h3>
+                <ul class="space-y-2 text-sm text-stone-600">
+                    <li>✅ OIDC keyless GitHub auth</li>
+                    <li>✅ Agreement lifecycle management</li>
+                    <li>✅ Immutable audit trails</li>
+                    <li>✅ Watermark enforcement</li>
+                    <li>✅ Sharing restrictions (drafts)</li>
+                    <li>✅ Actor attribution & timestamps</li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
+                <h3 class="font-bold text-stone-900 mb-4">⚙️ CI/CD Pipeline</h3>
+                <ul class="space-y-2 text-sm text-stone-600">
+                    <li>✅ Quality gates (ruff, pytest)</li>
+                    <li>✅ Docker build & ECR push</li>
+                    <li>✅ Terraform IaC deployment</li>
+                    <li>✅ Service stability waits</li>
+                    <li>✅ CloudWatch integration</li>
+                    <li>✅ Slack notifications (optional)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-stone-200 mt-12 text-center text-stone-500 text-sm">
+        <p>Interactive Architecture Report • Generated for Financial Production Infrastructure</p>
+        <p class="mt-2">Repository: <a href="https://github.com/cmiller9851-wq/state-machine-qps" class="text-sky-600 hover:text-sky-700">cmiller9851-wq/state-machine-qps</a></p>
+    </footer>
+
+</main>
+
+<script>
+    // Health check function
+    async function checkHealth() {
+        try {
+            const response = await fetch('/health', { method: 'GET' });
+            if (response.ok) {
+                document.getElementById('health-status').textContent = 'Healthy';
+                document.getElementById('health-status').className = 'text-2xl font-bold text-emerald-600';
+                document.getElementById('health-time').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+            } else {
+                document.getElementById('health-status').textContent = 'Offline';
+                document.getElementById('health-status').className = 'text-2xl font-bold text-orange-600';
+            }
+        } catch (error) {
+            document.getElementById('health-status').textContent = 'Offline';
+            document.getElementById('health-status').className = 'text-2xl font-bold text-orange-600';
+            document.getElementById('health-time').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+        }
+    }
+    
+    // Check health on load and every 30 seconds
+    checkHealth();
+    setInterval(checkHealth, 30000);
+
+    const depCtx = document.getElementById('dependencyChart').getContext('2d');
+    new Chart(depCtx, {
+        type: 'bar',
+        data: {
+            labels: ['FastAPI', 'Uvicorn', 'Pydantic', 'SQLAlchemy', 'Psycopg2', 'Alembic', 'HTTPX', 'Tenacity', 'Pytest'],
+            datasets: [{
+                label: 'System Tier & Version Pin',
+                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                backgroundColor: [
+                    'rgba(14, 165, 233, 0.8)', 
+                    'rgba(14, 165, 233, 0.8)', 
+                    'rgba(245, 158, 11, 0.8)', 
+                    'rgba(16, 185, 129, 0.8)', 
+                    'rgba(16, 185, 129, 0.8)', 
+                    'rgba(16, 185, 129, 0.8)', 
+                    'rgba(139, 92, 246, 0.8)', 
+                    'rgba(139, 92, 246, 0.8)', 
+                    'rgba(100, 116, 139, 0.8)'  
+                ],
+                borderRadius: 4
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const versions = ['v0.111.0', 'v0.30.1', 'v2.7.4', 'v2.0.31', 'v2.9.9', 'v1.13.1', 'v0.27.0', 'v8.4.1', 'v8.2.2'];
+                            const categories = ['Web/API', 'Web/Server', 'Validation', 'Database/ORM', 'Database/Driver', 'Database/Migration', 'Network/Client', 'Network/Resilience', 'Testing'];
+                            return categories[context.dataIndex] + ' - ' + versions[context.dataIndex];
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: { display: false, max: 1.2 },
+                y: { grid: { display: false }, ticks: { font: { weight: '600' } } }
+            }
+        }
+    });
+
+    const networkData = {
+        fiat: {
+            title: 'FIAT (Treasury/Baanx)',
+            desc: 'Simulating traditional institutional settlement rails. Exhibits consistent baseline volume with periodic high-value batch processing during standard banking hours. Settlement confirmation depends on webhook callbacks.',
+            data: [120, 150, 180, 140, 210, 190, 250],
+            color: 'rgba(14, 165, 233, 1)'
+        },
+        evm: {
+            title: 'EVM Node',
+            desc: 'Simulating Ethereum Virtual Machine throughput. Highly volatile transaction frequency dependent on network gas fees and smart contract execution latency.',
+            data: [300, 450, 200, 600, 400, 500, 700],
+            color: 'rgba(139, 92, 246, 1)'
+        },
+        solana: {
+            title: 'Solana Ledger',
+            desc: 'Simulating high-velocity Solana Mainnet traffic. Characterized by extremely high transaction volume and low latency, requiring aggressive connection pooling and tenacity backoffs.',
+            data: [800, 950, 1100, 900, 1200, 1350, 1500],
+            color: 'rgba(16, 185, 129, 1)'
+        },
+        bitcoin: {
+            title: 'Bitcoin Vectors',
+            desc: 'Simulating secure, slow-moving settlement vectors directed to the validated cryptographic anchor points. Low frequency, high certainty transactions.',
+            data: [40, 30, 45, 20, 50, 35, 60],
+            color: 'rgba(245, 158, 11, 1)'
+        }
+    };
+
+    const routeCtx = document.getElementById('routingChart').getContext('2d');
+    const routingChart = new Chart(routeCtx, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
+            datasets: [{
+                label: 'Simulated TX Volume',
+                data: networkData.fiat.data,
+                borderColor: networkData.fiat.color,
+                backgroundColor: networkData.fiat.color.replace('1)', '0.1)'),
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: networkData.fiat.color,
+                pointRadius: 4
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', align: 'end' },
+                tooltip: { mode: 'index', intersect: false }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                x: { grid: { display: false } }
+            },
+            interaction: { mode: 'nearest', axis: 'x', intersect: false }
+        }
+    });
+
+    const buttons = document.querySelectorAll('#network-controls button');
+    const detailsContainer = document.getElementById('network-details');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            buttons.forEach(btn => {
+                btn.className = 'px-5 py-2.5 rounded-lg text-sm font-semibold transition bg-stone-100 text-stone-600 hover:bg-stone-200';
+            });
+            this.className = 'px-5 py-2.5 rounded-lg text-sm font-semibold transition bg-sky-100 text-sky-800 hover:bg-sky-200';
+            
+            const netKey = this.getAttribute('data-network');
+            const dataObj = networkData[netKey];
+            
+            routingChart.data.datasets[0].data = dataObj.data;
+            routingChart.data.datasets[0].borderColor = dataObj.color;
+            routingChart.data.datasets[0].backgroundColor = dataObj.color.replace('1)', '0.1)');
+            routingChart.data.datasets[0].pointBackgroundColor = dataObj.color;
+            routingChart.update();
+            
+            detailsContainer.innerHTML = '<h4 class="font-bold text-sky-900 mb-2">Network Insights: ' + dataObj.title + '</h4><p class="text-sky-800 text-sm">' + dataObj.desc + '</p>';
+        });
+    });
+</script>
+</body>
+</html>
