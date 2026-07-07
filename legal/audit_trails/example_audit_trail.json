@@ -1,0 +1,47 @@
+{
+  "agreement_id": "FSM-2026-PARTNER-001",
+  "version": "1.0",
+  "partner_name": "Strategic Finance Partner",
+  "confidentiality_level": "CONFIDENTIAL_INTERNAL",
+  "entries": [
+    {
+      "status_change": "DRAFT_INTERNAL",
+      "timestamp": "2026-06-13T22:30:00Z",
+      "actor": "@vccmac",
+      "note": "Internal working document - not shared externally"
+    },
+    {
+      "status_change": "PROPOSAL_OUTREACH",
+      "timestamp": "2026-06-15T10:45:00Z",
+      "actor": "@vccmac",
+      "note": "Partner review copy prepared and sent via secure channel"
+    },
+    {
+      "status_change": "UNDER_NEGOTIATION",
+      "timestamp": "2026-06-20T14:20:00Z",
+      "actor": "@vccmac",
+      "note": "Partner provided initial feedback; discussions scheduled for next week"
+    },
+    {
+      "status_change": "UNDER_NEGOTIATION",
+      "timestamp": "2026-06-25T09:15:00Z",
+      "actor": "@vccmac",
+      "note": "Revised terms shared with partner; awaiting response"
+    },
+    {
+      "status_change": "LEGALLY_EXECUTED",
+      "timestamp": "2026-07-01T16:00:00Z",
+      "actor": "@legal-team",
+      "note": "Agreement signed by all parties; executed copy filed in secure legal repository"
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-06-13T22:30:00Z",
+    "last_updated": "2026-07-01T16:00:00Z",
+    "current_status": "LEGALLY_EXECUTED",
+    "can_be_shared": true,
+    "is_executable": true,
+    "watermark": "CONFIDENTIAL - LEGALLY EXECUTED AGREEMENT",
+    "total_revisions": 5
+  }
+}
