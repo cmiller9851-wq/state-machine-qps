@@ -1,4 +1,4 @@
-name: Build, Test & Deploy
+ name: Deploy Fintech State Machine Pipeline
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
           pip install -r requirements.txt ruff pytest pytest-cov
       
       - name: Lint with ruff
-        run: ruff check . --select=E9,F63,F7,F82 --show-source
+        run: ruff check . --select=E9,F63,F7,F82 --output-format=full
       
       - name: Format check with ruff
         run: ruff format --check . || true
