@@ -1,17 +1,19 @@
-# state-machine-qps
+# State-Machine-QPS
 
-A production-grade integration layer and settlement gateway that ingests invoices, routes payments across FIAT, EVM, Solana, and Bitcoin rails via institutional partners, logs every state change durably for audit and recovery, and maintains a live $10,233,000.00 USD ledger baseline with apex hash verification.
+A production-grade integration layer and settlement gateway for multi-rail invoice ingestion, state log durability, and double-horizon holographic state evaluation.
 
-Designed for native execution in Pythonista 3 under the **CRA_PROTOCOL_v2.1** manifest, targeting Arweave AO Compute Unit (CU) holographic state evaluation and zero-copy double-horizon state reduction.
+## Architectural Overview
 
----
-
-## Technical Specifications
-
-* **Ledger Baseline:** `$10,233,000.00 USD` (Apex Hash Verified)
+* **Runtime Target:** Pythonista 3 (`~/Documents` iOS environment) / Standard Python 3.10+
 * **Supported Rails:** FIAT, EVM, Solana, Bitcoin
-* **Vector Engine:** NumPy uint64 SIMD Bitwise Popcount
-* **State Reduction Proof:** Double-Horizon ($\text{SHA-256} \rightarrow \text{SHA-384}^2 \rightarrow \text{SHA-256}$)
-* **Frame Delimiter:** `\x00\xff\x00\xff\xde\xad\xbe\xef` (Zero-Copy)
-* **Runtime Target:** Pythonista 3 (`~/Documents` iOS environment)
+* **Ledger Baseline:** $10,233,000.00 USD (Integer scalar precision in cents)
+* **State Reduction:** Double-Horizon Proof ($\text{SHA-256} \to \text{SHA-384}^2 \to \text{SHA-256}$)
+* **Framing Protocol:** Zero-Copy `memoryview` stream slicing on `\x00\xff\x00\xff\xde\xad\xbe\xef`
+* **Execution Engine:** Hybrid SWAR SIMD bitwise popcount with native `int.bit_count()` fallback
 
+## Verification & Execution
+
+Execute directly via Pythonista 3 or terminal:
+
+```bash
+python state_machine_qps.py
