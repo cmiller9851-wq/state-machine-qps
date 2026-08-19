@@ -1,0 +1,13 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# iOS / Pythonista local environment artifacts
+site-packages/
+.Trash/
+*.pyui
+
+# System files
+.DS_Store
+Thumbs.db
