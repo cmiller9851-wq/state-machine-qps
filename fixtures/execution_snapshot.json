@@ -1,0 +1,18 @@
+[
+  {
+    "invoice_id": "INV-001",
+    "rail": "EVM",
+    "settled_amount_usd": 50000.0,
+    "new_ledger_baseline_usd": 10283000.0,
+    "vector_popcount_checksum": 12,
+    "apex_hash": "b39a20caf185e3534d27709939ce52efd5a395162b111e177503643f93558f38"
+  },
+  {
+    "invoice_id": "INV-002",
+    "rail": "SOLANA",
+    "settled_amount_usd": -12000.0,
+    "new_ledger_baseline_usd": 10271000.0,
+    "vector_popcount_checksum": 12,
+    "apex_hash": "45a4b22b49b65c3d2f8d0c4f9c372e9174fe98ee2a86948c211dc6adc209fccf"
+  }
+]
