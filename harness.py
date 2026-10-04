@@ -59,7 +59,7 @@ class SettledRuntimeHarness:
             print(f"[+] Execution Authorized. State Verified for Paid User: {user_address}")
             print(json.dumps(response, indent=2))
         else:
-            print([-] Execution Blocked: Core rule validation breach.")
+            print("[-] Execution Blocked: Core rule validation breach.")
 
 if __name__ == "__main__":
     # Target configurations
